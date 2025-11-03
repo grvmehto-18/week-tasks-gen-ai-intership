@@ -87,5 +87,5 @@ class ChatbotService:
         response = self.qa_chain.invoke({"input": query})
         # Remove the special token if it exists
         if "answer" in response and isinstance(response["answer"], str):
-            response["answer"] = response["answer"].replace("<|begin of sentence|>", "").strip()
+            response["answer"] = response["answer"].strip()
         return response
