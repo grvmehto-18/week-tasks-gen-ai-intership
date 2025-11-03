@@ -111,3 +111,11 @@ streamlit run src/streamlit_app/main_app.py
 ## Example Screenshots
 
 ![Screenshot](images/1.png)
+![Screenshot](images/2.png)
+![Screenshot](images/3.png)
+![Screenshot](images/4.png)
+![Screenshot](images/5.png)
+![Screenshot](images/6.png)
+![Screenshot](images/7.png)
+![Screenshot](images/8.png)
+![Screenshot](images/9.png)
