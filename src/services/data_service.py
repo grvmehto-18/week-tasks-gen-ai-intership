@@ -42,6 +42,7 @@ class DataService:
         """
         if self.df is None:
             self.load_data()
+        print(f"Initial shape: {self.df.shape}")
 
         print("Cleaning data...")
         # Rename columns to be more Python-friendly
@@ -66,20 +67,25 @@ class DataService:
 
         # For the purpose of price prediction, we need 'price_de'. Rows without it are not useful.
         self.df.dropna(subset=['price_de'], inplace=True)
+        print(f"Shape after dropping rows with missing price_de: {self.df.shape}")
         
         # Drop columns that are not useful for price prediction.
         self.df.drop(['Row_ID', 'title', 'price_range', 'price_nl', 'price_uk'], axis=1, inplace=True)
+        print(f"Shape after dropping irrelevant columns: {self.df.shape}")
 
         # Convert numerical columns from string to number, coercing errors
         for col in ['battery', 'acceleration_0_100', 'top_speed', 'range', 'efficiency', 'fastcharge', 'towing_capacity']:
             self.df[col] = pd.to_numeric(self.df[col], errors='coerce')
+        print(f"Shape after converting to numeric: {self.df.shape}")
 
         # Fill missing values with the mean for numerical columns
         for col in self.df.select_dtypes(include=np.number).columns:
             self.df[col].fillna(self.df[col].mean(), inplace=True)
+        print(f"Shape after filling NaNs with mean: {self.df.shape}")
         
         # Drop rows with any remaining missing values in other key columns
         self.df.dropna(inplace=True)
+        print(f"Shape after final dropna: {self.df.shape}")
 
         print("Data cleaning complete.")
         return self.df
